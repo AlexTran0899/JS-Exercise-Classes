@@ -42,9 +42,25 @@ class Airplane {
   */
   
  class Person {
-    
+  constructor(name, age) {
+    this.name = name;
+    this.age = age;
+    this.stomach = [];
   }
+  eat(food) {
+    if(this.stomach.length < 10) {
+      this.stomach.push(food);
+    }
+  }
+  poop() {
+    this.stomach = [];
+  }
+  toString() {
+    return `${this.name}, ${this.age}`
+  }
+}
   
+
   /*
     TASK 2
       - Write a Car class whose constructor initializes `model` and `milesPerGallon` from arguments.
@@ -60,9 +76,30 @@ class Airplane {
   */
   
  class Car {
-    
+   constructor(model, milesPerGallon){
+   this.tank = 0;
+   this.odometer = 0;
+   this.model = model;
+   this.milesPerGallon = milesPerGallon;
+   }
+   fill(gallons){ this.tank = this.tank + gallons
+   }
+   
+   drive(distance){
+     let driveAbleMiles = this.tank * this.milesPerGallon
+     if(distance <= driveAbleMiles) {
+       this.odometer += distance;
+       this.tank = this.tank - (distance / this.milesPerGallon)
+  }
+   else{
+     this.tank = 0;
+     this.odometer += driveAbleMiles;
+     return `I ran out of fuel at ${this.odometer} miles!`
+    }
   }
   
+ 
+}
   /*
     TASK 3
       - Write a Lambdasian class.
@@ -76,6 +113,15 @@ class Airplane {
           + {name} and {location} of course come from the instance's own properties.
   */
  class Lambdasian {
+   constructor(attri){
+     this.name = attri.name;
+     this.age = attri.age;
+     this.location = attri.location;
+   }
+   speak(){ 
+    return `Hello my name is ${this.name}, I am from ${this.location}`
+   }
+
     
   }
   
@@ -111,10 +157,18 @@ class Airplane {
           + `PRAssignment` a method that receives a subject as an argument and returns `student.name has submitted a PR for {subject}`
           + `sprintChallenge` similar to PRAssignment but returns `student.name has begun sprint challenge on {subject}`
   */
- class Student {
-     
+ class Student extends Lambdasian{
+   constructor(attri){
+     this.previousBackground = attri.previousBackground;
+     this.className = attri.className;
+     this.favSubjects = attri.favSubjects;
+
+   }
+   listSubjects(){
+     return `Loving ${this.favSubjects}`;
+   }
  }
-  
+
   /*
     TASK 6
       - Write a ProjectManager class extending Instructor.
